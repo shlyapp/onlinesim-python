@@ -7,6 +7,7 @@ from .logger import logger
 
 from .models.phone_number import PhoneNumberResponse, PhoneNumberRequest
 from .models.set_operation_ok import SetOperationOkResponse, SetOperationOkRequest
+from .models.get_balance import GetBalanceResponse, GetBalanceRequest
 
 class OnlimeSimAPI:
     def __init__(self, token: str):
@@ -37,3 +38,18 @@ class OnlimeSimAPI:
         response = self._make_request("GET", endpoint, data)
         set_operation_ok = SetOperationOkResponse(**response)
         return set_operation_ok
+
+    def get_state(self):
+        pass
+
+    def get_sms(self):
+        pass
+
+    def set_operation_revise(self):
+        pass
+
+    def get_balance(self, data: GetBalanceRequest = GetBalanceRequest()) -> GetBalanceResponse:
+        endpoint = "/getBalance.php"
+        response = self._make_request("GET", endpoint, data)
+        balance = GetBalanceResponse(**response)
+        return balance
