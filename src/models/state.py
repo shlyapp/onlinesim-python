@@ -25,5 +25,5 @@ class State(BaseModel):
     response: str
     tzid: int
     time: int
-    msg: List[Message] | str
+    msg: List[Message] | str = Field(None)
     form: str
