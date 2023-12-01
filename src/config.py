@@ -4,6 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-TOKEN = os.getenv("TOKEN")
+TOKEN = str(os.getenv("TOKEN"))
 MAX_ATTEMPS = 7
 DELAY = 10
