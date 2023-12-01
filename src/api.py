@@ -33,7 +33,6 @@ class OnlimeSimAPIClient:
         endpoint = "/getNum.php"
         response = self._make_request("GET", endpoint, data)
         phone_number = PhoneNumber(**response)
-        print(phone_number)
         return phone_number
     
     def set_operation_ok(self, data: OperationOkRequest) -> OperationOkResponse:
@@ -49,7 +48,7 @@ class OnlimeSimAPIClient:
             state = State(**response[0])
             return state
         except:
-            raise Exception("Номер не доступен")
+            raise Exception("Number not exist")
             
     def get_balance(self, data: BalanceRequest = BalanceRequest()) -> Balance:
         endpoint = "/getBalance.php"
