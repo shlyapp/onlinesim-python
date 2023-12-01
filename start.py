@@ -7,7 +7,7 @@ parent_dir = os.path.dirname(current_dir)
 os.chdir(parent_dir)
 
 scripts = [
-    'onlinesim-python.src.main',
+    'onlinesim-python.src.example',
 ]
 
 for script in scripts:
