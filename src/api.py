@@ -1,13 +1,11 @@
-from pydantic import BaseModel, ValidationError, parse_obj_as
 import requests
-import json
+from pydantic import BaseModel
 
-from .config import TOKEN, MAX_ATTEMPS, DELAY
 from .logger import logger
 
-from .models.phone_number import PhoneNumberResponse, PhoneNumberRequest
-from .models.set_operation_ok import SetOperationOkResponse, SetOperationOkRequest
-from .models.get_balance import GetBalanceResponse, GetBalanceRequest
+from .models.phone_number import PhoneNumber, PhoneNumberRequest
+from .models.operation import OperationOkResponse, OperationOkRequest
+from .models.balance import Balance, BalanceRequest
 from .models.state import State, StateRequest
 
 
@@ -28,17 +26,17 @@ class OnlimeSimAPI:
 
         return response
 
-    def get_phone_number(self, data: PhoneNumberRequest) -> PhoneNumberResponse:
+    def get_phone_number(self, data: PhoneNumberRequest) -> PhoneNumber:
         endpoint = "/getNum.php"
         response = self._make_request("GET", endpoint, data)
-        phone_number = PhoneNumberResponse(**response)
+        phone_number = PhoneNumber(**response)
         print(phone_number)
         return phone_number
     
-    def set_operation_ok(self, data: SetOperationOkRequest) -> SetOperationOkResponse:
+    def set_operation_ok(self, data: OperationOkRequest) -> OperationOkResponse:
         endpoint = "/SetOperationOk.php"
         response = self._make_request("GET", endpoint, data)
-        set_operation_ok = SetOperationOkResponse(**response)
+        set_operation_ok = OperationOkResponse(**response)
         return set_operation_ok
 
     def get_state(self, data: StateRequest):
@@ -50,9 +48,9 @@ class OnlimeSimAPI:
         except:
             raise Exception("Номер не доступен")
             
-    def get_balance(self, data: GetBalanceRequest = GetBalanceRequest()) -> GetBalanceResponse:
+    def get_balance(self, data: BalanceRequest = BalanceRequest()) -> Balance:
         endpoint = "/getBalance.php"
         response = self._make_request("GET", endpoint, data)
-        balance = GetBalanceResponse(**response)
+        balance = Balance(**response)
         return balance
 

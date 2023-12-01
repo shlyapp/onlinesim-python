@@ -9,7 +9,7 @@ class PhoneNumberRequest(BaseModel):
     lang: str = Field(None)
 
     
-class PhoneNumberResponse(BaseModel):
+class PhoneNumber(BaseModel):
     response: int
     tzid: int 
     number: str

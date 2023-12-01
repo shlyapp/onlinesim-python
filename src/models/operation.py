@@ -1,13 +1,13 @@
 from pydantic import BaseModel, Field, validator, root_validator
 
 
-class SetOperationOkRequest(BaseModel):
+class OperationOkRequest(BaseModel):
     tzid: int
     ban: int = Field(0)
     lang: str = Field("ru")
 
 
-class SetOperationOkResponse(BaseModel):
+class OperationOkResponse(BaseModel):
     response: int
     tzid: int
 
