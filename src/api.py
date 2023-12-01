@@ -9,13 +9,15 @@ from .models.balance import Balance, BalanceRequest
 from .models.state import State, StateRequest
 
 
-class OnlimeSimAPI:
+class OnlimeSimAPIClient:
     def __init__(self, token: str):
         self._token = token
         self._base_url = "https://onlinesim.io/api"
+        logger.info(f"Create OnlimeSimAPIClient with token {token}")
 
     def _make_request(self, method: str, endpoint: str, data: BaseModel):
         url = f"{self._base_url}{endpoint}"
+        logger.info(f"Send {method} request\nurl: {url}\ndata: {data}")
         params = data.model_dump(exclude_none=True)
         params['apikey'] = self._token
         response = requests.request(
@@ -23,6 +25,7 @@ class OnlimeSimAPI:
             url=url,
             params=params
         ).json()
+        logger.info(f"Get answer from request:\n{response}")
 
         return response
 
